@@ -1,0 +1,21 @@
+logging:
+  level:
+    root: info
+  file:
+ #   name: landingpage.log
+    path: C:/logs
+    max-size: 1MB
+    
+spring:
+  datasource:
+       url: jdbc:mysql://localhost:3308/pl_sys?characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+       username: root
+       password: 25262728
+       driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+      hibernate:
+        ddl-auto: update
+ 
+    
+    
+

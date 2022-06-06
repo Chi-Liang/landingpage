@@ -1,0 +1,22 @@
+server:
+   port: 80
+   servlet:
+      context-path: /landingpage
+      encoding:
+         enabled: true
+         charset: UTF-8
+         force: true
+spring:
+   profiles:
+      active: dev
+   thymeleaf:
+      cache: false  
+   jpa:
+      database-platform: org.hibernate.dialect.MySQL8Dialect   
+   batch:
+      jdbc.initialize-schema: always
+      job.enabled: false
+   mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher 
+   
