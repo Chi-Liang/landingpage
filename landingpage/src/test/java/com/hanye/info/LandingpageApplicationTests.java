@@ -17,7 +17,7 @@ public class LandingpageApplicationTests extends AbstractTest {
 
 			mockMvc.perform(MockMvcRequestBuilders.post("/api/sendmail").accept(MediaType.APPLICATION_JSON))
 					.andExpect(MockMvcResultMatchers.jsonPath("$.result").exists())
-					.andExpect(MockMvcResultMatchers.jsonPath("$.result").value("success1"))
+					.andExpect(MockMvcResultMatchers.jsonPath("$.result").value("success"))
 					.andDo(MockMvcResultHandlers.print());
 
 	}
