@@ -25,7 +25,7 @@ public class SendMailController {
 	@Autowired
 	private MailJobService mailJobService;
 	
-	@GetMapping("/sendmail")
+	@PostMapping("/sendmail")
 //	@ApiOperation(value = "寄信",tags = "用戶寄信",notes = "用戶註冊寄信")
 	public String SendMailStart() {
 		mailJobService.startMailJob();
