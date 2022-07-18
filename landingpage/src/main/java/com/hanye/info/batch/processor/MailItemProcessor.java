@@ -1,4 +1,4 @@
-package com.hanye.info.processor;
+package com.hanye.info.batch.processor;
 
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.stereotype.Component;

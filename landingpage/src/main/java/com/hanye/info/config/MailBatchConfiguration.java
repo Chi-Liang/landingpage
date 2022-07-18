@@ -1,4 +1,4 @@
-package com.hanye.info.batch.config;
+package com.hanye.info.config;
 
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -10,9 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.hanye.info.processor.MailItemProcessor;
-import com.hanye.info.reader.MailItemReader;
-import com.hanye.info.writer.MailItemWriter;
+import com.hanye.info.batch.processor.MailItemProcessor;
+import com.hanye.info.batch.reader.MailItemReader;
+import com.hanye.info.batch.writer.MailItemWriter;
+
 
 @Configuration
 @EnableBatchProcessing

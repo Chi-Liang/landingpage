@@ -1,4 +1,4 @@
-package com.hanye.info.writer;
+package com.hanye.info.batch.writer;
 
 import java.util.List;
 import org.springframework.batch.item.ItemWriter;

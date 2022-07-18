@@ -1,4 +1,4 @@
-package com.hanye.info.reader;
+package com.hanye.info.batch.reader;
 
 import java.util.Arrays;
 import java.util.List;
