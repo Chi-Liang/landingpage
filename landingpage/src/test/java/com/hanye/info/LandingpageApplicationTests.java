@@ -1,5 +1,6 @@
 package com.hanye.info;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
@@ -7,6 +8,7 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import com.hanye.info.vo.ReturnSendMailVo;
 
 @SpringBootTest
 public class LandingpageApplicationTests extends AbstractTest {
@@ -21,5 +23,15 @@ public class LandingpageApplicationTests extends AbstractTest {
 					.andDo(MockMvcResultHandlers.print());
 
 	}
+	
+	@Test
+	public void testStartMailJob() {
+
+		ReturnSendMailVo returnSendMailVo = mailJobService.startMailJob();
+		Assert.assertSame(returnSendMailVo.getResult(),"success");
+
+	}
+	
+	
 
 }
