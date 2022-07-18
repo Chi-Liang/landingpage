@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hanye.info.service.MailJobService;
+import com.hanye.info.vo.ReturnSendMailVo;
 
 import io.swagger.annotations.Api;
 
@@ -27,11 +28,9 @@ public class SendMailController {
 	
 	@PostMapping("/sendmail")
 //	@ApiOperation(value = "寄信",tags = "用戶寄信",notes = "用戶註冊寄信")
-	public String SendMailStart() {
-		mailJobService.startMailJob();
-		System.out.println("Job Started...");
-		return "success";
-		
+	public ReturnSendMailVo SendMailStart() {
+		ReturnSendMailVo returnSendMailVo = mailJobService.startMailJob();
+		return returnSendMailVo;
 	}
 	
 }

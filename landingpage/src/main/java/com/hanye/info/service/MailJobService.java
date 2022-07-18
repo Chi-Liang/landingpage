@@ -12,6 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.hanye.info.vo.ReturnSendMailVo;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class MailJobService {
 	
@@ -22,7 +27,7 @@ public class MailJobService {
 	@Autowired
 	Job sendMailJob;
 	
-	public void startMailJob() {
+	public ReturnSendMailVo startMailJob() {
 		Map<String, JobParameter> params = new HashMap<>();
 		params.put("currentTime", new JobParameter(System.currentTimeMillis()));
 		
@@ -31,8 +36,11 @@ public class MailJobService {
 		try {
 			JobExecution jobExecution = 
 				 jobLauncher.run(sendMailJob, jobParameters);
+			return new ReturnSendMailVo("success","");
+			
 		}catch(Exception e) {
-			System.out.println("Exception while starting job");
+			log.error("Exception while starting job");
+			return new ReturnSendMailVo("fail",e.getMessage());
 		}
 	}
 	
