@@ -15,25 +15,18 @@ import java.io.IOException;
 @Component
 public class SysLoginFailureHandler implements AuthenticationFailureHandler {
 
-    private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
-    
-    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
-    		AuthenticationException exception) throws IOException, ServletException {
-    	
-    	handle(request, response, exception);
-    	
+    @Override
+    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
+        handle(request, response, exception);
     }
 
     protected void handle(HttpServletRequest request,
                           HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
 
-        String errorMsg = exception.getMessage();
-        request.setAttribute("errorMsg", errorMsg);
+        request.setAttribute("errorMsg", "帳號或密碼錯誤");
         String targetUrl = "/loginError";
 
         request.getRequestDispatcher(targetUrl).forward(request, response);
 
-        redirectStrategy.sendRedirect(request, response, targetUrl);
     }
-
 }

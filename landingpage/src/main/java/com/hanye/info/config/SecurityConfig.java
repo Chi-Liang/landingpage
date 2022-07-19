@@ -3,36 +3,59 @@ package com.hanye.info.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
-import org.springframework.security.web.util.matcher.AnyRequestMatcher;
+import com.hanye.info.security.SysLoginFailureHandler;
+import com.hanye.info.security.SysLoginSuccessHandler;
 
-import com.hanye.info.security.SysAuthenticationProvider;
-import com.hanye.info.security.SysLoginFilter;
-
-@SuppressWarnings("deprecation")
 @EnableWebSecurity
-public class SecurityConfig  extends WebSecurityConfigurerAdapter {
+public class SecurityConfig {
 
-    @Autowired
-    private SysAuthenticationProvider sysAuthenticationProvider;
-
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
+	@Autowired
+    private SysLoginSuccessHandler sysLoginSuccessHandler;
+	
+	@Autowired
+    private SysLoginFailureHandler sysLoginFailureHandler;
+	
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		PasswordEncoder encoder = new BCryptPasswordEncoder();
+		return encoder;
+	}
+	
+	@Bean
+	public UserDetailsService userDetailsService() {
+		PasswordEncoder encoder = passwordEncoder();
+		InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
+		manager.createUser(User.withUsername("admin")
+				.password(encoder.encode("1qaz2wsx"))
+				.roles("ADMIN","USER").build());
+		
+		
+		return manager;
+	}
+	
+	
+    @Bean
+    public SecurityFilterChain configure(HttpSecurity http) throws Exception {
     	
-        http.cors().and().authorizeRequests()
-                .antMatchers("/api/**").authenticated()
+        http.csrf().disable().cors().and().authorizeRequests()
+                .antMatchers("/auth/**","/api/**").authenticated()
                 .and()
-                .addFilterBefore(sysLoginFilter(), UsernamePasswordAuthenticationFilter.class)
                 .formLogin()
                 .loginPage("/login")
+                .successHandler(sysLoginSuccessHandler)
+                .failureHandler(sysLoginFailureHandler)
                 .and()
                 .logout()
                 .invalidateHttpSession(true)
@@ -45,7 +68,9 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
                 .expiredUrl("/login?expired")
                 .sessionRegistry(sessionRegistry());
         
-        http.csrf().disable();
+        http.userDetailsService(userDetailsService());
+        
+        return http.build();
     }
 
     @Bean
@@ -53,30 +78,11 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
         SessionRegistry sessionRegistry = new SessionRegistryImpl();
         return sessionRegistry;
     }
-
-    @Override
-    public void configure(WebSecurity web) {
-        web.ignoring().antMatchers("/css/**", "/fonts/**", "/js/**");
-    }
-
+    
+    
     @Bean
-    public static ServletListenerRegistrationBean httpSessionEventPublisher() {
-        return new ServletListenerRegistrationBean(new HttpSessionEventPublisher());
-    }
-
-    @Bean
-    public SysLoginFilter sysLoginFilter()
-            throws Exception {
-        SysLoginFilter sysLoginFilter =
-                new SysLoginFilter("/login", authenticationManager());
-        sysLoginFilter.setAuthenticationManager(authenticationManagerBean());
-
-        return sysLoginFilter;
-    }
-
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(sysAuthenticationProvider);
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return (web) -> web.ignoring().antMatchers("/css/**", "/fonts/**", "/js/**");
     }
 
 }
