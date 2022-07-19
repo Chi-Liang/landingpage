@@ -1,4 +1,4 @@
-package com.hanye.info.model;
+package com.hanye.info.model.mysql;
 
 import java.util.Collection;
 
