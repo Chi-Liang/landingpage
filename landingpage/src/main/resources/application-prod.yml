@@ -15,6 +15,10 @@ spring:
   jpa:
       hibernate:
         ddl-auto: update
+  data: 
+    mongodb:
+      uri: mongodb://root:25262728@localhost:27017/landingpage
+      auto-index-creation: true      
  
     
     
