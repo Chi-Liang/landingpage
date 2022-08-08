@@ -1,5 +1,6 @@
 package com.hanye.info.config;
 
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -13,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import com.hanye.info.repository.mysql.UserRepository;
 import com.hanye.info.security.SysLoginFailureHandler;
 import com.hanye.info.security.SysLoginSuccessHandler;
 
@@ -25,6 +27,9 @@ public class SecurityConfig {
 	@Autowired
     private SysLoginFailureHandler sysLoginFailureHandler;
 	
+	@Autowired
+    private UserRepository  userRepository;
+	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		PasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -33,13 +38,12 @@ public class SecurityConfig {
 	
 	@Bean
 	public UserDetailsService userDetailsService() {
-		PasswordEncoder encoder = passwordEncoder();
 		InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-		manager.createUser(User.withUsername("admin")
-				.password(encoder.encode("1qaz2wsx"))
-				.roles("ADMIN","USER").build());
-		
-		
+		userRepository.findAll().forEach(u -> {
+			manager.createUser(User.withUsername(u.getUid()).password(u.getPwd()).roles(
+					u.getRoles().stream().map(r -> r.getName()).collect(Collectors.toList()).toArray(new String[0]))
+					.build());
+		});
 		return manager;
 	}
 	
