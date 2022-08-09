@@ -41,7 +41,7 @@ public class SecurityConfig {
 		InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
 		userRepository.findAll().forEach(u -> {
 			manager.createUser(User.withUsername(u.getUid()).password(u.getPwd()).roles(
-					u.getRoles().stream().map(r -> r.getName()).collect(Collectors.toList()).toArray(new String[0]))
+					u.getRoles().stream().map(r -> r.getRid()).collect(Collectors.toList()).toArray(new String[0]))
 					.build());
 		});
 		return manager;
