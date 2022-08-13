@@ -30,12 +30,12 @@ public class SysLoginSuccessHandler implements AuthenticationSuccessHandler {
                           HttpServletResponse response, Authentication authentication)
             throws IOException {
 
-        String targetUrl = "/auth/dashboard";
+        var targetUrl = "/auth/dashboard";
         redirectStrategy.sendRedirect(request, response, targetUrl);
     }
 
     protected void clearAuthenticationAttributes(HttpServletRequest request) {
-        HttpSession session = request.getSession(false);
+        var session = request.getSession(false);
         if (session == null) {
             return;
         }

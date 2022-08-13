@@ -1,8 +1,8 @@
 package com.hanye.info.security;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -28,11 +28,10 @@ public class LandingUsersDetailService implements UserDetailsService {
 	}
 	
     private List<GrantedAuthority> genAuthority(Set<Role> roles) {
-    	List<GrantedAuthority> authorityList = new ArrayList<GrantedAuthority>();
-    	for(Role role:roles) {
-    		SimpleGrantedAuthority authority = new SimpleGrantedAuthority(role.getRid());
-    		authorityList.add(authority);
-    	}
+    	
+    	List<GrantedAuthority> authorityList = roles.stream().map(role -> {
+    		return new SimpleGrantedAuthority(role.getRid());
+    	}).collect(Collectors.toList());
     	
     	return authorityList;
     }

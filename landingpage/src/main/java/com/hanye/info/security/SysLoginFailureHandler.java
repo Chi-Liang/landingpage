@@ -21,8 +21,7 @@ public class SysLoginFailureHandler implements AuthenticationFailureHandler {
                           HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
 
         request.setAttribute("errorMsg", "帳號或密碼錯誤");
-        String targetUrl = "/loginError";
-
+        var targetUrl = "/loginError";
         request.getRequestDispatcher(targetUrl).forward(request, response);
 
     }
