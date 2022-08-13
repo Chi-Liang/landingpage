@@ -14,15 +14,15 @@ import com.hanye.info.batch.MailJob;
 public class QuartzConfig {
 
     @Bean
-    public JobDetail jobDetail1(){
+    public JobDetail jobMailSend(){
         return JobBuilder.newJob(MailJob.class).storeDurably().build();
     }
     
     @Bean
-    public Trigger trigger1(){
+    public Trigger trigger(){
         return TriggerBuilder.newTrigger()
-                .forJob(jobDetail1())
-                .withSchedule(CronScheduleBuilder.cronSchedule("* * 1 ? * *"))
+                .forJob(jobMailSend())
+                .withSchedule(CronScheduleBuilder.cronSchedule("* * * ? * *"))
                 .build();
     }
 
