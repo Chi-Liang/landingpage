@@ -1,6 +1,7 @@
 package com.hanye.info.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,9 +19,10 @@ public class SendMailController {
 	@Autowired
 	private MailJobService mailJobService;
 	
-	@PostMapping("/sendmail")
+	@GetMapping("/sendmail")
 //	@ApiOperation(value = "寄信",tags = "用戶寄信",notes = "用戶註冊寄信")
 	public ReturnSendMailVo SendMailStart() {
+		
 		ReturnSendMailVo returnSendMailVo = mailJobService.startMailJob();
 		return returnSendMailVo;
 	}

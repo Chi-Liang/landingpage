@@ -22,7 +22,7 @@ public class QuartzConfig {
     public Trigger trigger(){
         return TriggerBuilder.newTrigger()
                 .forJob(jobMailSend())
-                .withSchedule(CronScheduleBuilder.cronSchedule("* * * ? * *"))
+                .withSchedule(CronScheduleBuilder.cronSchedule("* * 1 ? * *"))
                 .build();
     }
 

@@ -1,15 +1,9 @@
 package com.hanye.info.vo;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+public class ReturnSendMailVo extends ReturnVo {
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class ReturnSendMailVo {
-	
-	private String result;
-	private String message;
+	public ReturnSendMailVo(String result,String message) {
+		super(result,message);
+	}
 	
 }
