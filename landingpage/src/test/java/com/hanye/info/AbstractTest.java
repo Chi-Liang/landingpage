@@ -4,11 +4,9 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-
-import com.hanye.info.repository.mongo.GroceryRepository;
+import com.hanye.info.service.GroceryService;
 import com.hanye.info.service.MailJobService;
 
 @RunWith(SpringRunner.class)
@@ -23,9 +21,6 @@ public class AbstractTest {
 	protected MailJobService mailJobService;
 	
 	@Autowired
-	protected GroceryRepository groceryRepository;
-	
-//	@Autowired
-//	protected MongoTemplate mongoTemplate;
+	protected GroceryService groceryService;
 	
 }

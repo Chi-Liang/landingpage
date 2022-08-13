@@ -1,16 +1,13 @@
 package com.hanye.info;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.*;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 import com.github.javafaker.Faker;
-import com.hanye.info.model.mongo.GroceryItem;
+import com.hanye.info.vo.GroceryItemVo;
 import org.junit.runners.MethodSorters;
 
-@SpringBootTest
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class testMongo extends AbstractTest {
 	
@@ -25,25 +22,30 @@ public class testMongo extends AbstractTest {
 	
 	@Test
 	public void test1CreateGrocery() {
-		var groceryItem = groceryRepository.save(new GroceryItem(id,faker.name().fullName(),faker.code().asin()));
+		groceryService.saveGroceryItem(new GroceryItemVo(id,faker.name().fullName(),faker.code().asin()));
+	}
+	
+	@Test
+	public void test2QueryById() {
+		var groceryItem = groceryService.findGroceryItem(id);
 		assertEquals(groceryItem.getId(),id);
 	}
 	
 	@Test
-	public void test2QueryGrocery() {
-		var groceryItem = groceryRepository.findById(id).get();
-		assertEquals(groceryItem.getId(),id);
+	public void test3UpdateById() {
+		groceryService.editGroceryItem(new GroceryItemVo(id,faker.name().fullName(),faker.code().asin()));
 	}
 	
 	@Test
-	public void test3UpdateGrocery() {
-		var groceryItem = groceryRepository.save(new GroceryItem(id,faker.name().fullName(),faker.code().asin()));
-		assertEquals(groceryItem.getId(),id);
+	public void test4DeleteById() {
+		groceryService.deleteGroceryItem(id);
 	}
 	
 	@Test
-	public void test4DeleteGrocery() {
-		groceryRepository.deleteById(id);
+	public void test5QueryAll() {
+		groceryService.findAllGroceryItem().stream().forEach( grocery -> {
+			 assertNotEquals(grocery.getId(),id);
+		});
 	}
 
 }

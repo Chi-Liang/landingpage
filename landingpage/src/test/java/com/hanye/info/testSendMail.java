@@ -1,13 +1,9 @@
 package com.hanye.info;
 
 import static org.junit.Assert.*;
-import java.util.List;
 import org.junit.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-import com.hanye.info.model.mongo.GroceryItem;
 import com.hanye.info.vo.ReturnVo;
 
-@SpringBootTest
 public class testSendMail extends AbstractTest {
 
 	@Test
