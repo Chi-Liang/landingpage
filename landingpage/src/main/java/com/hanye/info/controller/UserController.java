@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hanye.info.service.UserService;
-import com.hanye.info.vo.UserVO;
+import com.hanye.info.vo.UserVo;
 
 @Controller
 @RequestMapping("/auth/user")
@@ -28,14 +28,14 @@ public class UserController {
 	
 	@GetMapping("/add")
 	public String add(Model model) {
-		UserVO user = new UserVO();
+		UserVo user = new UserVo();
 		model.addAttribute("user", user);
 		
 		return "user/add";
 	}
 	
 	@PostMapping("/addSubmit")
-	public String addSubmit(@ModelAttribute UserVO userDTO) {	
+	public String addSubmit(@ModelAttribute UserVo userDTO) {	
 		userService.saveUser(userDTO);
 		
 		return "redirect:/auth/user/list";
@@ -49,7 +49,7 @@ public class UserController {
 	}
 	
 	@PostMapping("/editSubmit")
-	public String editSubmit(@ModelAttribute UserVO userDTO) {	
+	public String editSubmit(@ModelAttribute UserVo userDTO) {	
 		userService.editUser(userDTO);
 		
 		return "redirect:/auth/user/list";
@@ -63,7 +63,7 @@ public class UserController {
 	}
 	
 	@PostMapping("/changePwdSubmit")
-	public String changePwdSubmit(@ModelAttribute UserVO userDTO) {
+	public String changePwdSubmit(@ModelAttribute UserVo userDTO) {
 		userService.changeUserPwd(userDTO);
 		
 		return "redirect:/auth/user/list";

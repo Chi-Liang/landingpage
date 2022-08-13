@@ -21,8 +21,14 @@ public class LandingpageApplicationTests extends AbstractTest {
 	@Test
 	public void testMongo() {
 
-		List<GroceryItem> item = mongoTemplate.findAll(GroceryItem.class);
-		assertTrue(item.size() > 0);
+//		List<GroceryItem> item = mongoTemplate.findAll(GroceryItem.class);
+//		assertTrue(item.size() > 0);
+//		GroceryItemVo groceryItem = new GroceryItemVo();
+//		groceryItem.setId("a");
+//		groceryItem.setCategory("b");
+//		groceryItem.setName("c");
+//		mongoTemplate.save(groceryItem);
+		
 
 	}
 	

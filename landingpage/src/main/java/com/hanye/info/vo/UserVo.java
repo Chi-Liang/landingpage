@@ -3,7 +3,7 @@ package com.hanye.info.vo;
 import lombok.Data;
 
 @Data
-public class UserVO {
+public class UserVo {
 
 	private String uid;
 	private String pwd;
