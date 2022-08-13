@@ -8,7 +8,7 @@ import com.hanye.info.model.mongo.GroceryItem;
 import com.hanye.info.vo.ReturnVo;
 
 @SpringBootTest
-public class LandingpageApplicationTests extends AbstractTest {
+public class testSendMail extends AbstractTest {
 
 	@Test
 	public void testStartMailJob() {
@@ -18,19 +18,6 @@ public class LandingpageApplicationTests extends AbstractTest {
 
 	}
 	
-	@Test
-	public void testMongo() {
-
-//		List<GroceryItem> item = mongoTemplate.findAll(GroceryItem.class);
-//		assertTrue(item.size() > 0);
-//		GroceryItemVo groceryItem = new GroceryItemVo();
-//		groceryItem.setId("a");
-//		groceryItem.setCategory("b");
-//		groceryItem.setName("c");
-//		mongoTemplate.save(groceryItem);
-		
-
-	}
 	
 //	@Test
 //	@WithMockUser(username = "admin", password = "1qaz2wsx")

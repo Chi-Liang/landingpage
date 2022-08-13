@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.hanye.info.repository.mongo.GroceryRepository;
 import com.hanye.info.service.MailJobService;
 
 @RunWith(SpringRunner.class)
@@ -22,6 +23,9 @@ public class AbstractTest {
 	protected MailJobService mailJobService;
 	
 	@Autowired
-	protected MongoTemplate mongoTemplate;
+	protected GroceryRepository groceryRepository;
+	
+//	@Autowired
+//	protected MongoTemplate mongoTemplate;
 	
 }
