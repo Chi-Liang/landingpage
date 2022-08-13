@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import com.hanye.info.vo.ReturnVo;
 
 @RestControllerAdvice(basePackages= {"com.hanye.info.rest"})
-public class GlobalRestExceptionHandler {
+public class RestExceptionHandler {
 	
     @ExceptionHandler(value = { Exception.class })
     public ReturnVo exceptionHandler(Exception e) {
