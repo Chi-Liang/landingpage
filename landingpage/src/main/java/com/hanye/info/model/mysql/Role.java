@@ -10,7 +10,12 @@ import javax.persistence.ManyToMany;
 
 import org.hibernate.annotations.Nationalized;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 @Entity
+@Data
+@NoArgsConstructor
 public class Role {
 
 	@Id
@@ -25,38 +30,9 @@ public class Role {
     @ManyToMany(mappedBy = "roles")
     private Collection<User> users;
     
-    public Role() {
-    	
-    }
-
 	public Role(String rid) {
 		super();
 		this.rid = rid;
 	}
-
-	public String getRid() {
-		return rid;
-	}
-
-	public void setRid(String rid) {
-		this.rid = rid;
-	}
-
-	public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-	public Collection<User> getUsers() {
-		return users;
-	}
-
-	public void setUsers(Collection<User> users) {
-		this.users = users;
-	}
-
 
 }

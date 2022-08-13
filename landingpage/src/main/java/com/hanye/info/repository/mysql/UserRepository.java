@@ -6,5 +6,7 @@ import com.hanye.info.model.mysql.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, String> {
-
+	
+	public User findByUid(String uid);
+	
 }

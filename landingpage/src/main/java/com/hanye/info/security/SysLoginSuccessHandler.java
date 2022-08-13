@@ -29,12 +29,8 @@ public class SysLoginSuccessHandler implements AuthenticationSuccessHandler {
     protected void handle(HttpServletRequest request,
                           HttpServletResponse response, Authentication authentication)
             throws IOException {
-//        SysUserDetails sysUserDetails = (SysUserDetails)authentication.getPrincipal();
-//        HttpSession httpSession = request.getSession();
-//        httpSession.setAttribute("uid", sysUserDetails.getUsername());
 
         String targetUrl = "/auth/dashboard";
-
         redirectStrategy.sendRedirect(request, response, targetUrl);
     }
 
