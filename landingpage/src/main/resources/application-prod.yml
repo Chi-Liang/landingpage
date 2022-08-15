@@ -2,7 +2,7 @@ logging:
   level:
     root: info
   file:
- #   name: landingpage.log
+ #   name: landing.log
     path: C:/logs
     max-size: 1MB
     
