@@ -10,10 +10,10 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.hanye.info</groupId>
-	<artifactId>landingpage</artifactId>
+	<artifactId>landing</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>landingpage</name>
+	<name>landing</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
@@ -107,7 +107,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>landingpage</finalName>
+		<finalName>landing</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

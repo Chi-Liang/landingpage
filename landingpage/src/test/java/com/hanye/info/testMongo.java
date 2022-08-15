@@ -1,48 +1,55 @@
 package com.hanye.info;
 
 import static org.junit.Assert.*;
-import org.junit.BeforeClass;
-import org.junit.FixMethodOrder;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import com.github.javafaker.Faker;
 import com.hanye.info.vo.GroceryItemVo;
-import org.junit.runners.MethodSorters;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class testMongo extends AbstractTest {
 	
 	private static String id;
 	
 	private static final Faker faker = Faker.instance();
 	
-	@BeforeClass
+	@BeforeAll
 	public static void InitId(){
 		id = faker.idNumber().invalid();
 	}
 	
 	@Test
-	public void test1CreateGrocery() {
+	@Order(1)
+	public void testCreateGrocery() {
 		groceryService.saveGroceryItem(new GroceryItemVo(id,faker.name().fullName(),faker.code().asin()));
 	}
 	
 	@Test
-	public void test2QueryById() {
+	@Order(2)
+	public void testQueryById() {
 		var groceryItem = groceryService.findGroceryItem(id);
 		assertEquals(groceryItem.getId(),id);
 	}
 	
 	@Test
-	public void test3UpdateById() {
+	@Order(3)
+	public void testUpdateById() {
 		groceryService.editGroceryItem(new GroceryItemVo(id,faker.name().fullName(),faker.code().asin()));
 	}
 	
 	@Test
-	public void test4DeleteById() {
+	@Order(4)
+	public void testDeleteById() {
 		groceryService.deleteGroceryItem(id);
 	}
 	
 	@Test
-	public void test5QueryAll() {
+	@Order(5)
+	public void testQueryAll() {
 		groceryService.findAllGroceryItem().stream().forEach( grocery -> {
 			 assertNotEquals(grocery.getId(),id);
 		});

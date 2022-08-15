@@ -1,7 +1,7 @@
 server:
    port: 80
    servlet:
-      context-path: /landingpage
+      context-path: /landing
       encoding:
          enabled: true
          charset: UTF-8

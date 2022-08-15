@@ -1,7 +1,7 @@
 package com.hanye.info;
 
 import static org.junit.Assert.*;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import com.hanye.info.vo.ReturnVo;
 
 public class testSendMail extends AbstractTest {
@@ -10,7 +10,7 @@ public class testSendMail extends AbstractTest {
 	public void testStartMailJob() {
 
 		ReturnVo returnVo = mailJobService.startMailJob();
-		assertSame(returnVo.getResult(),"success");
+		assertEquals(returnVo.getResult(),"success");
 
 	}
 	
