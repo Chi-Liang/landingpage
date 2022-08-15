@@ -20,7 +20,7 @@ spring:
         hibernate.format_sql: true
   data: 
     mongodb:
-      uri: mongodb://root:25262728@localhost:27017/landingpage
+      uri: mongodb://system:25262728@localhost:27017/landing
       auto-index-creation: true           
   
     
